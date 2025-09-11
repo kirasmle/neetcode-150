@@ -53,5 +53,29 @@ Explanation: Using a dictionary, we store the remainder of each value and search
             bigdict[tuple(count)].append(s)  
 
         return bigdict.values()
+Time Complexity: O(n^2)
+Explanation: Using a dictionary, we are storing a tuple is basically a list of the 26 characters and their count as the key and the words that correspond to that count as the value. We are finding these values using their ascii.
+
+347.     def topKFrequent(self, nums, k):
+        import heapq
+
+        seen = {}
+        for dig in nums:
+            if dig in seen:
+                seen[dig] += 1
+            else:
+                seen[dig] = 1
+
+        max_heap = []
+        for key, value in seen.items():
+            heapq.heappush(max_heap, (-value, key))
+        
+        top_k = []
+        for _ in range(k):
+            if max_heap:
+                negative_value, key = heapq.heappop(max_heap)
+                top_k.append(key)
+        
+        return top_k
 Time Complexity:
 Explanation:
