@@ -1,1 +1,34 @@
+217. Contains Duplicate
+    def containsDuplicate(self, nums):
+        seen = set()
+        for dig in nums:
+            if dig in seen:
+                return True
+            else:
+                seen.add(dig)
+        
+        return False
+
+Time Complexity: O(n)
+Explanation: Using a set, we can avoid creating a double for loop by storing digits that have not been seen or returning true if a duplicate was found.
+
+242. Valid Anagram
+    def isAnagram(self, s, t):
+        sdict = {}
+        for char in s:
+            if char in sdict:
+                sdict[char] += 1
+            else:
+                sdict[char] = 1
+        
+        tdict = {}
+        for char in t:
+            if char in tdict:
+                tdict[char] += 1
+            else:
+                tdict[char] = 1
+        
+        return sdict == tdict
+Time Complexity: O(n)
+Explanation: Using a dictionary, we store the characters and their counts for s and t. Then comparing the dictionaries to see if they are anagrams.
 
