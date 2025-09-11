@@ -32,3 +32,26 @@ Explanation: Using a set, we can avoid creating a double for loop by storing dig
 Time Complexity: O(n)
 Explanation: Using a dictionary, we store the characters and their counts for s and t. Then comparing the dictionaries to see if they are anagrams.
 
+1. Two Sum
+    def twoSum(self, nums, target):
+        numdict = {}
+        for idx, i in enumerate(nums):
+            remain = target - i
+            if remain in numdict:
+                return [numdict[remain], idx]
+            numdict[i] = idx
+Time Complexity: O(n)
+Explanation: Using a dictionary, we store the remainder of each value and search of the remainder of a certain value exists in the list.
+
+49. Group Anagrams
+    def groupAnagrams(self, strs):
+        bigdict = defaultdict(list)
+        for s in strs:
+            count = [0] * 26
+            for c in s:
+                count[ord(c) - ord('a')] += 1
+            bigdict[tuple(count)].append(s)  
+
+        return bigdict.values()
+Time Complexity:
+Explanation:
