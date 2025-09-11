@@ -77,5 +77,5 @@ Explanation: Using a dictionary, we are storing a tuple is basically a list of t
                 top_k.append(key)
         
         return top_k
-Time Complexity:
-Explanation:
+Time Complexity: O(nlogn)
+Explanation: Using a max heap, we will store the values of the number and the count for which it occurs as a tuple. Now iterating through k, we will pop off the top k values from the max heap.
