@@ -79,3 +79,68 @@ Explanation: Using a dictionary, we are storing a tuple is basically a list of t
         return top_k
 Time Complexity: O(nlogn)
 Explanation: Using a max heap, we will store the values of the number and the count for which it occurs as a tuple. Now iterating through k, we will pop off the top k values from the max heap.
+
+271. Encode and Decode String
+not available with leetcode basic plan:(
+
+238. Product of Array Except Self
+    def productExceptSelf(self, nums):
+        prefix = [1] * len(nums)
+        prefix[1] = nums[0]
+        for i in range(2, len(nums)):
+            prefix[i] = prefix[i - 1] * nums[i - 1]
+        
+        suffix = [1] * len(nums)
+        suffix[len(nums) - 2] = nums[len(nums) - 1]
+        for i in range(len(nums) - 3, -1, -1):
+            suffix[i] = suffix[i + 1] * nums[i + 1]
+        
+        res = [0] * len(nums)
+        for i in range(len(nums)):
+            res[i] = prefix[i] * suffix[i]
+
+        return res
+Time Complexity: O(n)
+Explanation: Create a prefix and suffix array of the product sum then multiply the two for the answer.
+
+36. Valid Sudoku
+    def isValidSudoku(self, board):
+        rows = defaultdict(set)
+        cols = defaultdict(set)
+        unit = defaultdict(set)
+
+        for r in range(9):
+            for c in range(9):
+                if board[r][c] == '.': continue
+                if (board[r][c] in rows[r] or
+                   board[r][c] in cols[c] or
+                   board[r][c] in unit[(r // 3, c // 3)]):
+                   return False
+                rows[r].add(board[r][c])
+                cols[c].add(board[r][c])
+                unit[(r // 3, c // 3)].add(board[r][c])
+
+        return True   
+Time Complexity: O(n^2)
+Explanation: Create a set to keep track of the digits that are in each row, column, and square unit. Iterate through the sudoku board, if the tile is blank skip, else if a number is repeated in the same row, column, or square unit return false, else add that value to the respect row, column, and square unit (r // 3, c // 3).
+
+128. Longest Consecutive Sequence
+    def longestConsecutive(self, nums):
+        if not nums: return 0
+        nums.sort()
+        temp = 1
+        res = 1
+        for i in range(1,len(nums)):
+            if nums[i] == nums[i - 1] + 1:
+                temp += 1
+            elif nums[i] == nums[i - 1]:
+                continue
+            else:
+                res = max(temp, res)
+                temp = 1
+        
+        return max(res, temp)
+Time Complexity: O(nlogn)
+Explanation: Iterate through the sorted array and use greedy to keep the longest consecutive seq.
+
+
