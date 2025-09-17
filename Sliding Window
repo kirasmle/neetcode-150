@@ -10,3 +10,19 @@
         return profit
 Time Complexity: O(n)
 Explanation: Iterating through the array starting at the first element, keep track of the minimum buy value with i being the current sell value. Keep the max profit.
+
+3. Longest Substring Without Repeating Characters
+    def lengthOfLongestSubstring(self, s):
+        seen = set()
+        length = 0
+        l = 0
+        for r in range(len(s)):
+            while s[r] in seen:
+                seen.remove(s[l])
+                l += 1
+            seen.add(s[r])
+            length = max(length, r - l + 1)
+
+        return length
+Time Complexity: O(n)
+Explanation: By keeping track of the seen characters in a set, we create a left and right pointer, iterating with the right. If we've seen the value at r before, remove l from the set and inc l to shorten the window. Add unseen r values to the set and keep the max length.
