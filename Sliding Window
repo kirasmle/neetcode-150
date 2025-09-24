@@ -44,3 +44,21 @@ Explanation: By keeping track of the seen characters in a set, we create a left 
         return res
 Time Complexity: O(n)
 Explanation: Using a dynamic window, we keep track of the frequency of each occuring char and store the char with the max frequency, to ensure our window does not surpass k replacements, we inc the left when the window length - the freq of the max char exceeds k. Finally, we always store the max window length.
+
+567. Permutation in String
+    def checkInclusion(self, s1, s2):
+        s1dict = {}
+        for i in range(len(s1)):
+            s1dict[s1[i]] = 1 + s1dict.get(s1[i], 0)
+        l = 0
+        for r in range(len(s1) - 1, len(s2)):
+            tempdict = {}
+            for j in range(l, r + 1):
+                tempdict[s2[j]] = 1 + tempdict.get(s2[j], 0) 
+            if tempdict == s1dict:
+                return True
+            tempdict.clear()
+            l += 1
+        return False
+Time Complexity: O(m * n)
+Explanation: Create a dictionary storing the chars and freqs of the first string and iterate through the second on a fixed window size, recomputing a dictionary each time and comparing to the s1dict. This is a brute force and inefficient solution, revisit later.
