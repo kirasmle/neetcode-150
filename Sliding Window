@@ -92,3 +92,25 @@ Explanation: Create a dictionary storing the chars and freqs of the first string
         return s[l:r+1] if reslen != float("inf") else ""
 Time Complexity: O(n)
 Explanation: using a dynamic window, hashmap, and int of have and need, keep track of how many letters in the current substring meet the need in string t. while all conditions are met, keep increasing the left pointer to get the smallest window.
+
+239. Sliding Window Maximum
+    def maxSlidingWindow(self, nums, k):
+        res = []
+        l = 0
+        r = 0
+        deq = deque()
+
+        while r < len(nums):
+            while deq and nums[deq[-1]] < nums[r]:
+                deq.pop()
+            deq.append(r)
+            if l > deq[0]:
+                deq.popleft()
+            if (r + 1) >= k:
+                res.append(nums[deq[0]])
+                l += 1
+            r += 1
+
+        return res
+Time Complexity: O(n)
+Explanation: This solution uses a monotonic dequeue to track the max at each window. The deq stores the indices of each element where the first element will always be the max of the window. With the right pointer, smaller elements of the deq are removed and the current r is added to the deq. With the left pointer, left indices are popped if we are past that window. Once the full first window is formed, the value at the beginning of the deq is appened to res.
