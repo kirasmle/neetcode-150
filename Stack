@@ -1,0 +1,18 @@
+20. Valid Parenthesis
+    def isValid(self, s):
+        stack = []
+        parens = {')': '(',
+                '}': '{',
+                ']': '['}
+        for char in s:
+            if char in parens:
+                if stack and stack[-1] == parens[char]:
+                    stack.pop()
+                else:
+                    return False
+            else:
+                stack.append(char)
+
+        return True if not stack else False
+Time: O(n)
+Explanation: Using a dictionary to quickly find the matching parenthesis, we use a stack to keep track of the parenthesis. For closing parens, only pop from the stack when the next char is matching, otherwise return false. And for opening parens. we just add to the stack.
