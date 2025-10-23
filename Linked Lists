@@ -29,13 +29,13 @@ Explanation: Keep track of pointers in both lists and iterate by choosing the sm
 
 141. Linked List Cycle
     def hasCycle(self, head):
+        seen = set()
         while head:
-            print(head.val)
-            if head.val == 'hi':
+            if head in seen:
                 return True
             else:
-                head.val = 'hi'
+                seen.add(head)
                 head = head.next
-        return False 
+        return False
 Time: O(n)
-Explanation: Each time we visit a node, change the val to hi. If we see a hi again we know theres a cycle
+Explanation: Each time we visit a node, add to set. If we see a node again we know theres a cycle
