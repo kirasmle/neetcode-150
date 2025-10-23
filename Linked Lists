@@ -39,3 +39,52 @@ Explanation: Keep track of pointers in both lists and iterate by choosing the sm
         return False
 Time: O(n)
 Explanation: Each time we visit a node, add to set. If we see a node again we know theres a cycle
+
+143. Reorder List
+    def reorderList(self, head):
+        len = 0
+        curr = head
+        while curr:
+            len += 1
+            curr = curr.next
+        if len == 0 or len == 1:
+            return head
+        split = len // 2
+        count = 1
+        l1 = head
+        while head:
+            if count == split:
+                tail = head.next
+                head.next = None
+                break
+            else:
+                head = head.next
+                count += 1
+        l2 = None
+        while tail:
+            temp = tail.next
+            tail.next = l2
+            l2 = tail
+            tail = temp
+        flag = True
+        reshead = l1
+        mergeprev = None
+        while l1 and l2:
+            if flag:
+                prev = l1
+                l1temp = l1.next
+                l1.next = l2
+                flag = False
+                l1 = l1temp
+            else:
+                prev = l2
+                l2temp = l2.next
+                l2.next = l1
+                flag = True
+                l2 = l2temp
+        if l2:
+            prev.next = l2
+        return reshead
+Time: O(n)
+Explanation: first find len, split list, reverse second half, and merge in alternating order.
+
