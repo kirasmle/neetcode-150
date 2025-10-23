@@ -10,3 +10,32 @@
         return prev
 Time: O(n)
 Explanation: Iterate through the linked list once, flipping the arrows so everything points backwards.
+
+21. Merge Two Sorted Lists
+    def mergeTwoLists(self, list1, list2):
+        curr = head = ListNode()
+        while list1 and list2:
+            if list1.val <= list2.val:
+               curr.next = list1
+               list1 = list1.next
+            else:
+                curr.next = list2
+                list2 = list2.next
+            curr = curr.next
+        curr.next = list1 or list2
+        return head.next
+Time: O(n)
+Explanation: Keep track of pointers in both lists and iterate by choosing the smallest val
+
+141. Linked List Cycle
+    def hasCycle(self, head):
+        while head:
+            print(head.val)
+            if head.val == 'hi':
+                return True
+            else:
+                head.val = 'hi'
+                head = head.next
+        return False 
+Time: O(n)
+Explanation: Each time we visit a node, change the val to hi. If we see a hi again we know theres a cycle
